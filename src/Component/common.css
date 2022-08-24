@@ -1,0 +1,38 @@
+.header {
+    text-align: center;
+}
+
+.product_components {
+    background-color: antiquewhite;
+    height: 38rem;
+    width: 35rem;
+    margin: 3rem;
+    text-decoration: none;
+    color: black;
+}
+
+.product_components img {
+    width: 25rem;
+    height: 25rem;
+    padding: 1rem;
+    margin-left: 2rem;
+}
+
+.content_rate {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.product_details {
+    display: flex;
+    flex-direction: column;
+}
+
+.product_details .img_part img {
+    height: 25rem;
+    width: 25rem;
+    padding: auto;
+}
