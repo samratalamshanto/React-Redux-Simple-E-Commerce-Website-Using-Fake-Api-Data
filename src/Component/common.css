@@ -1,22 +1,38 @@
+.grid {
+    display: grid;
+    column-gap: 1rem;
+    row-gap: 1rem;
+    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+
+.btn_shadow {
+    padding: calc(18*0.0625rem) calc(25*0.0625rem);
+    border-radius: calc(10*0.0625rem);
+    transition: 0.3s all ease;
+    color: black;
+    transition: 0.5s;
+    background-color: linear-gradient(145deg, #e2e8ec, #ffffff);
+    box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
+
+}
+
+.cursor {
+    animation: blink 1s linear infinite forwards;
+}
+
 .header {
     text-align: center;
 }
 
 .product_components {
-    background-color: antiquewhite;
     height: 38rem;
-    width: 35rem;
-    margin: 3rem;
-    text-decoration: none;
-    color: black;
+    margin-bottom: 1rem;
+
 }
 
-.product_components img {
-    width: 25rem;
-    height: 25rem;
-    padding: 1rem;
-    margin-left: 2rem;
-}
+.product_components img {}
 
 .content_rate {
     display: flex;
@@ -27,12 +43,89 @@
 
 
 .product_details {
+    margin-top: 7rem;
     display: flex;
     flex-direction: column;
 }
 
 .product_details .img_part img {
     height: 25rem;
-    width: 25rem;
-    padding: auto;
+    width: 30rem;
+    padding: 0;
+}
+
+
+
+
+
+
+
+
+
+.product_list {
+    margin-top: 7rem;
+    height: fit-content;
+
+}
+
+
+
+
+.home_header {
+    margin-top: 2rem;
+    background-color: rgb(120, 196, 188);
+}
+
+.home_img {
+    width: ;
+    height: fit-content;
+}
+
+.home_text {
+    position: absolute;
+    margin-top: 18rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 52rem;
+    color: rgb(14, 13, 13);
+}
+
+.home_text h1 {
+    font-size: 60px;
+    font-weight: 900;
+}
+
+.home_text h3 {
+    font-size: 40px;
+    font-weight: 300;
+}
+
+.c-black {
+    color: black;
+}
+
+.c-black:hover {
+    color: black;
+
+}
+
+.product_list {
+    /* margin-top: 6rem; */
+}
+
+.rating {
+    justify-content: space-between;
+}
+
+.content_text {
+    padding: 2.5rem;
+    margin: 2.5rem;
+}
+
+.details_button {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
