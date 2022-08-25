@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Image, Badge, Stack } from '@chakra-ui/react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useDispatch, useSelector } from "react-redux";
 
 import "./common.css";
 
 const ProductComponents = (props) => {
   const { id, title, price, category, image, rate, count, description } = props;
+
 
 
   return (
@@ -23,7 +24,7 @@ const ProductComponents = (props) => {
                 <Card.Text className="fw-bold fs-4">
                   ${price}
                 </Card.Text>
-                <Button variant="outline-dark" className="btn btn-outline-dark fw-bold ">Add To Cart</Button>
+                <Button variant="outline-dark" className="btn btn-outline-dark fw-bold" >Buy Now</Button>
               </Card.Body>
             </Card>
           </div>

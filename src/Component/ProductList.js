@@ -14,7 +14,7 @@ import Loading from "./Loading";
 const ProductList = () => {
   //useSelector() is used for the reading state from redux store
   const products = useSelector((state) => state.allProducts.products);  //this allProducts is the key in index reducer
-  console.log("Data after dispatching using action and reducer: ", products);
+  // console.log("Data after dispatching using action and reducer: ", products);
 
   const [loading, setLoading] = useState(false);
   const [FilterLoading, setFilterLoading] = useState(false);
@@ -25,7 +25,7 @@ const ProductList = () => {
   const fetchData = async () => {
     setLoading(true);
     const response = await axios.get("https://fakestoreapi.com/products").catch((err) => console.log(err))
-    console.log("Response after fetching ", response.data); //main data
+    // console.log("Response after fetching ", response.data); //main data
     dispatch(setProducts(response.data));  //dispatch them with the proper actions "setProducts(products)"---method
     setLoading(false);
   }

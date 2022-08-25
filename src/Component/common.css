@@ -4,7 +4,11 @@
     row-gap: 1rem;
     justify-content: space-between;
     grid-template-columns: repeat(3, 1fr);
+}
 
+.hola {
+    height: 50rem;
+    background-color: aqua;
 }
 
 .btn_shadow {
@@ -43,13 +47,13 @@
 
 
 .product_details {
-    margin-top: 7rem;
+    margin-top: 6rem;
     display: flex;
     flex-direction: column;
 }
 
 .product_details .img_part img {
-    height: 25rem;
+    height: fit-content;
     width: 30rem;
     padding: 0;
 }
@@ -128,4 +132,58 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: -8rem;
+}
+
+.details_button Button:hover {
+    color: black;
+    background-color: aquamarine;
+}
+
+.details_button .navlink {
+    color: rgb(0, 0, 0);
+    background-color: aquamarine;
+}
+
+.details_button .navlink:hover {
+    color: white;
+    background-color: black;
+}
+
+.cart {}
+
+.cart h1 {
+    margin-top: 6rem;
+}
+
+.cart_part {
+    /* background-color: wheat; */
+    margin: 2rem;
+    margin-left: 5rem;
+}
+
+.cart_img {
+    background-color: #e2e8ec;
+}
+
+.cart_img img {
+    height: fit-content;
+    width: 25rem;
+    padding: 2rem;
+}
+
+.cart_price h4 {
+    margin-right: 2rem;
+}
+
+.cart_content {
+    margin-left: 5rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+
+}
+
+.cart_button {
+    margin-left: 10rem;
 }

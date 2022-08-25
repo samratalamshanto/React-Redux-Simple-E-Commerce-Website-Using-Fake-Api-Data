@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom"; //to get param value---param Hooks
+import { NavLink, useParams } from "react-router-dom"; //to get param value---param Hooks
 import { useDispatch, useSelector } from "react-redux";
 import { selectedProduct, removeSelectedReducer } from "../Redux/actions/productAction";
 import Loading from "./Loading";
@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faStar, faStarHalf, faFaceGrinStars } from '@fortawesome/free-solid-svg-icons'
 
-
+import { addCart } from "../Redux/actions/cartAction";
 
 
 
@@ -27,7 +27,10 @@ const ProductDetails = () => {
 
     const response = await axios.get(`https://fakestoreapi.com/products/${productId}`).catch((err) => console.log(err));
     dispatch(selectedProduct(response.data));
+  }
 
+  const addProductToCart = (product) => {
+    dispatch(addCart(product));
   }
 
   useEffect(() => {
@@ -48,7 +51,7 @@ const ProductDetails = () => {
           <div><Loading /></div>
         ) : (
           <div className="d-flex">
-            <div className="img_part p-6 btn_shadow">
+            <div className="img_part  mx-2 btn_shadow">
               <img src={image} alt={description} />
             </div>
             <div className="container row ">
@@ -66,7 +69,8 @@ const ProductDetails = () => {
 
 
                 <div className="d-flex details_button">
-                  <Button variant="outline-dark" className="btn btn-lg btn-outline-dark fw-bold d-flex align-items-center btn_shadow"><FontAwesomeIcon icon={faCartShopping} /> Add To Cart</Button>
+                  <Button variant="outline-dark" onClick={() => addProductToCart(product)} className="btn btn-lg btn-outline-dark fw-bold d-flex align-items-center btn_shadow"><FontAwesomeIcon icon={faCartShopping} /> Add To Cart</Button>
+                  <NavLink to="/cart" className="navlink btn btn-lg btn-dark fw-bold d-flex align-items-center ms-2 btn_shadow"><FontAwesomeIcon icon={faCartShopping} /> Go To Cart</NavLink>
                 </div>
               </div>
             </div>

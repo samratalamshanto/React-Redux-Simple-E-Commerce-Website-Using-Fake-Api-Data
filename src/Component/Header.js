@@ -6,14 +6,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from "react-router-dom";
+import { useSelector } from 'react-redux';
+
 
 function Header() {
+
+  const cart = useSelector(state => state.HandelCartReducer);
   return (
     <div className="header">
       <div className="navbar">
         <Navbar bg="light" expand="lg" fixed='top' className="py-3 shadow-sm bg-white">
           <Container >
-            <Navbar.Brand href="/" className="fw-bold fs-2 mx-auto "> Fake Shop BD</Navbar.Brand>
+            <Navbar.Brand to="/" className="fw-bold fs-2 mx-auto "> Fake Shop BD</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav
@@ -21,15 +26,19 @@ function Header() {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="#products">Products</Nav.Link>
-                <Nav.Link href="#about">About</Nav.Link>
-                <Nav.Link href="#contact">Contact</Nav.Link>
+                <NavLink className="text-decoration-none c-black me-3" to="/">Home</NavLink>
+                <NavLink className="text-decoration-none c-black me-3" to="/product">Products</NavLink>
+                <NavLink className="text-decoration-none c-black me-3" to="/about">About</NavLink>
+                <NavLink className="text-decoration-none c-black me-3" to="/contact">Contact</NavLink>
               </Nav>
               <div className='buttons'>
-                <a href="#cart" className="btn  btn-outline-dark bg-info me-1 btn_shadow "><FontAwesomeIcon icon={faCartPlus} /> LogIn</a>
-                <a href="#cart" className="btn btn-outline-dark bg-info me-1 btn_shadow "><FontAwesomeIcon icon={faCartPlus} /> SignUp</a>
-                <a href="#cart" className="btn btn-outline-dark bg-info btn_shadow "><FontAwesomeIcon icon={faCartPlus} /> Cart</a>
+                <NavLink to="/login" className="btn  btn-outline-dark bg-info me-1 btn_shadow "><FontAwesomeIcon icon={faCartPlus} /> LogIn</NavLink>
+                <NavLink to="/signup" className="btn btn-outline-dark bg-info me-1 btn_shadow "><FontAwesomeIcon icon={faCartPlus} /> SignUp</NavLink>
+                <NavLink to="/cart" className="btn btn-outline-dark bg-info btn_shadow ">
+                  <FontAwesomeIcon icon={faCartPlus} />
+                  Cart ({cart.length}) {/* unique product shows in cart length */}
+                </NavLink>
+
               </div>
 
             </Navbar.Collapse>

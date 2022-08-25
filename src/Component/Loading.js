@@ -6,31 +6,34 @@ import 'react-loading-skeleton/dist/skeleton.css';
 function Loading() {
     return (
         <>
-            <Button variant="primary" disabled>
-                <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                />
-                <span className="visually-hidden">Loading...</span>
-            </Button>{' '}
-            <Button variant="primary" disabled>
-                <Spinner
-                    as="span"
-                    animation="grow"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                />
-                Loading...
-            </Button>
-
-            <div className="grid">
-                <Skeleton height={30} />
-                <br />
-                <Skeleton count={10} />
+            <div className="container align-center">
+                <Button variant="primary" disabled>
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                    />
+                    <span className="visually-hidden">Loading...</span>
+                </Button>{' '}
+                <Button variant="primary" disabled>
+                    <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                    />
+                    Loading...
+                </Button>
+            </div>
+            <div className="container row">
+                <div className="grid">
+                    <Skeleton height={600} />
+                    <Skeleton height={600} />
+                    <Skeleton height={600} />
+                </div>
             </div>
         </>
     );
