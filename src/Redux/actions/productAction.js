@@ -1,19 +1,38 @@
 import { ActionTypes } from "../constants/constants.js";
+import axios from "axios";
 //action return object of type and payload
-export const setProducts = (products) => {
-  return {
-    //object
-    type: ActionTypes.SET_PRODUCTS,
-    payload: products,  //set value or data in payload
-  };
+export const setProducts = () => async (dispatch) => {
+  try {
+    const response = await axios.get("https://fakestoreapi.com/products").catch((err) => console.log(err));
+    dispatch({
+      //object
+      type: ActionTypes.SET_PRODUCTS,
+      payload: response.data,  //set value or data in payload
+    })
+
+  } catch (error) {
+    console.log(error);
+  }
+
+
 };
 
-export const selectedProduct = (product) => {
-  return {
-    //object
-    type: ActionTypes.SELECTED_PRODUCT,
-    payload: product,
-  };
+export const selectedProduct = (productId) => async (dispatch) => {
+
+  try {
+
+    const response = await axios.get(`https://fakestoreapi.com/products/${productId}`).catch((err) => console.log(err));
+    dispatch({
+      //object
+      type: ActionTypes.SELECTED_PRODUCT,
+      payload: response.data,
+    });
+
+
+  } catch (error) {
+    console.log(error)
+  }
+
 };
 
 export const removeSelectedReducer = () => {

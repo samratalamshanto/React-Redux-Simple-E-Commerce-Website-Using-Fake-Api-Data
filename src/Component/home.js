@@ -21,7 +21,7 @@ const Home = () => {
                         New Season Arrivals
                     </h1>
                     <h3>
-                        Check Out All <span>
+                        Check Out All <span className="animated_text">
                             {text}
                             <span className="cursor">|</span>
                         </span>

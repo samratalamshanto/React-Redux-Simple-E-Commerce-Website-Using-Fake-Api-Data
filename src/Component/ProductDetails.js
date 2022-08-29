@@ -19,32 +19,27 @@ const ProductDetails = () => {
   const { productId } = useParams();
 
   const product = useSelector((state) => state.singleProduct); //this SingleProduct is the key in index reducer
-  console.log(product);
+  // console.log(product);
   const { id, title, price, category, image, rating, description } = product;
 
   const dispatch = useDispatch();
-  const productDetails = async () => {
-
-    const response = await axios.get(`https://fakestoreapi.com/products/${productId}`).catch((err) => console.log(err));
-    dispatch(selectedProduct(response.data));
-  }
 
   const addProductToCart = (product) => {
     dispatch(addCart(product));
   }
 
   useEffect(() => {
-    if (productId && productId !== "") productDetails();  //need to check conditions
+    if (productId && productId !== "") dispatch(selectedProduct(productId));  //need to check conditions
     return () => {  //#################### special #####################
       dispatch(removeSelectedReducer());  //for removing the last product
     }
 
-  }, [productId])  //called useEffect when new id came 
+  }, [dispatch])  //called useEffect when new id came 
   //Object.keys(product).length === 0 
   return (
 
     <div className="product_details container" key={id}>
-      <div className="row">
+      <div className="row header_title">
         <h1>Product Details:</h1>
         <hr />
         {Object.keys(product).length === 0 ? (

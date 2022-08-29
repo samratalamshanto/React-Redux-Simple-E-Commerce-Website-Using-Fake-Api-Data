@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import { useDispatch, useSelector } from "react-redux";
 
 import "./common.css";
+import { background } from "@chakra-ui/react";
 
 const ProductComponents = (props) => {
   const { id, title, price, category, image, rate, count, description } = props;
@@ -16,7 +17,7 @@ const ProductComponents = (props) => {
       <div className="product_components btn_shadow" key={id}>
         <Link className="text-decoration-none c-black" to={`/product/${id}`}>
           <div className="col-md-3 mb-4 product_component_content card  text-center mb-4 ">
-            <Card style={{ width: '22rem', height: '35rem' }}>
+            <Card style={{ width: '22rem', height: '35rem', backgroundColor: "#e2e8ec" }} >
               <Card.Img style={{ width: '20rem', height: '25rem', padding: '1rem', marginLeft: '0.5rem' }} variant="top" src={image} alt={description} />
               <Card.Body>
                 <Card.Title>{title.substring(0, 20)}...</Card.Title>

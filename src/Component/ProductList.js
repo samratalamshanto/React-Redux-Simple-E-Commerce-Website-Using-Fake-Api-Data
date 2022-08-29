@@ -15,22 +15,17 @@ const ProductList = () => {
   //useSelector() is used for the reading state from redux store
   const products = useSelector((state) => state.allProducts.products);  //this allProducts is the key in index reducer
   // console.log("Data after dispatching using action and reducer: ", products);
+  // console.log(products);
+
 
   const [loading, setLoading] = useState(false);
   const [FilterLoading, setFilterLoading] = useState(false);
   const [filter, setFilter] = useState(products);   // for filtering we set product data in "filter":
 
   const dispatch = useDispatch();  //dispatch Hook
-  //fetching data from fake api
-  const fetchData = async () => {
-    setLoading(true);
-    const response = await axios.get("https://fakestoreapi.com/products").catch((err) => console.log(err))
-    // console.log("Response after fetching ", response.data); //main data
-    dispatch(setProducts(response.data));  //dispatch them with the proper actions "setProducts(products)"---method
-    setLoading(false);
-  }
+
   useEffect(() => {
-    fetchData()
+    dispatch(setProducts());
   }, []);
 
   const setFilterProduct = (category) => {
@@ -50,7 +45,7 @@ const ProductList = () => {
           (
             <div className="product_list container my-5 py-5">
               <div className="row ">
-                <div className="col-12 mb-5">
+                <div className="col-12 mb-5 header_title">
                   <h1 className="display-6 fw-bolder text-center">Latest Products</h1>
                   <hr />
                 </div>
