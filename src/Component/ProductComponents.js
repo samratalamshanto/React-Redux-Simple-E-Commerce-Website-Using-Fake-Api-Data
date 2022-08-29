@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import { useDispatch, useSelector } from "react-redux";
 
 import "./common.css";
-import { background } from "@chakra-ui/react";
+
 
 const ProductComponents = (props) => {
   const { id, title, price, category, image, rate, count, description } = props;

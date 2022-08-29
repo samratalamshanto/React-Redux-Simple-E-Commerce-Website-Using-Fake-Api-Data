@@ -26,8 +26,10 @@
     animation: blink 1s linear infinite forwards;
 }
 
-.header {
+.header .navbar .nav {
     text-align: center;
+    background-color: #001101;
+    color: white;
 }
 
 .header_title h2,
@@ -96,14 +98,17 @@ h5 {
 }
 
 
-
+.home {
+    background-color: #f4f4f4;
+}
 
 .home_header {
     margin-top: 2rem;
     background-color: rgb(120, 196, 188);
 }
 
-.home_img {
+.home .home_img img {
+    width: fit-content;
     height: fit-content;
 }
 
@@ -142,6 +147,11 @@ h5 {
 
 .rating {
     justify-content: space-between;
+
+
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
 }
 
 .content_text {

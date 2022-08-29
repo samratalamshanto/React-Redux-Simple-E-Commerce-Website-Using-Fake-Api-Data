@@ -8,12 +8,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faCartPlus, faRightToBracket, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch, } from 'react-redux';
+import { setCart } from "../Redux/actions/cartAction.js"
+import React, { useEffect, useState } from "react"
 
 function Header() {
+  const dispatch = useDispatch();
 
-  const cart = useSelector(state => state.HandelCartReducer);
+  useEffect(() => {
+    dispatch(setCart());
+  }, [dispatch]);
+
+
+
+  const cart = useSelector(state => state.HandelCartReducer.cart);
+
+
 
   return (
     <div className="header">

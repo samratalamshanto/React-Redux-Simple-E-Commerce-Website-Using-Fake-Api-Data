@@ -1,13 +1,21 @@
 import { ActionTypes } from "../constants/constants.js";
 import axios from "axios";
 
+// <cart--->
+//     createdAt: "2022-08-29T05:42:29.094Z"
+//     productId: 20
+//     qty: 1
+//     updatedAt: "2022-08-29T05:42:29.094Z"
+//     __v: 0
+//     _id: "630c51c49c2b178b7529ef25"
+
 export const setCart = () => async (dispatch) => {
     try {
         const responseCartData = await axios.get("http://localhost:5001/cartdata");
         // console.log(responseCartData);
         dispatch({
             type: ActionTypes.ADD_CART,
-            payload: responseCartData,
+            payload: responseCartData.data,
         });
 
     } catch (error) {
@@ -25,8 +33,8 @@ export const addCart = (product) => async (dispatch) => {
             "productId": product.id,
             "qty": 1
         }
-        console.log(qty);
-        console.log("new", newProduct);
+        // console.log(qty);
+        // console.log("new", newProduct);
         let axiosConfig = {
             method: "POST",
             headers: {
@@ -59,13 +67,24 @@ export const addCart = (product) => async (dispatch) => {
 
 export const incCart = (product) => async (dispatch) => {
 
+    // createdAt: "2022-08-27T13:53:09.928Z"
+    // productId: 4
+    // qty: 1
+    // updatedAt: "2022-08-27T13:53:09.928Z"
+    // __v: 0
+    // _id: "630a21c53a2e4226fdccc0ec"
 
-    const { id, title, price, category, image, rating, description, qty } = product;
-    console.log("hola inc", qty + 1);
+    const { productId, qty } = product;
+    const newProduct = {
+        productId: productId,
+        qty: qty + 1,
+    }
+    // console.log("hola inc", qty + 1);
     dispatch({
         type: ActionTypes.INC_CART,
         payload: product,
     })
+
 
     // const newProduct = {
     //     "productId": product.id,
@@ -95,10 +114,10 @@ export const incCart = (product) => async (dispatch) => {
 
 export const delCart = (product) => async (dispatch) => {
     try {
-        const { id, title, price, category, image, rating, description, qty } = product;
+        const { productId, qty } = product;
         const newProduct = {
-            productId: id,
-            qty: qty,
+            productId: productId,
+            qty: qty,  //del qty===1 that why this is called
         }
 
         // if (qty === 1) {
@@ -119,11 +138,10 @@ export const delCart = (product) => async (dispatch) => {
 
 export const decCart = (product) => async (dispatch) => {
     try {
-        const { id, title, price, category, image, rating, description, qty } = product;
-        console.log("hola dec", qty - 1);
+        const { productId, qty } = product;
         const newProduct = {
-            productId: id,
-            qty: qty,
+            productId: productId,
+            qty: qty - 1,
         }
 
         // if (qty !== 1) {
