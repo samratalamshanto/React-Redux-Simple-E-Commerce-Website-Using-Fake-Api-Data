@@ -3,6 +3,15 @@ import { ActionTypes } from "../constants/constants.js";
 const initialCart = {
     cart: [],
 };
+
+
+// createdAt: "2022-08-29T05:42:29.094Z"
+// productId: 20
+// qty: 1
+// updatedAt: "2022-08-29T05:42:29.094Z"
+// __v: 0
+// _id: "630c51c49c2b178b7529ef25"
+
 export const HandelCartReducer = (state = initialCart, { type, payload }) => {
     // const product = payload; //we send product to add or delete in action
 
@@ -10,7 +19,7 @@ export const HandelCartReducer = (state = initialCart, { type, payload }) => {
         case ActionTypes.SET_CART:  //get cart data
             // const cart = payload;
             return {
-                ...initialCart, cart: payload //get cart data
+                ...initialCart, cart: [...initialCart.cart, payload] //get cart data
             }
             break;
 
@@ -27,40 +36,61 @@ export const HandelCartReducer = (state = initialCart, { type, payload }) => {
                 qty: 1
             }
 
-
             break;
 
         case ActionTypes.INC_CART:
+            // createdAt: "2022-08-27T13:53:09.928Z"
+            // productId: 4
+            // qty: 1
+            // updatedAt: "2022-08-27T13:53:09.928Z"
+            // __v: 0
+            // _id: "630a21c53a2e4226fdccc0ec"
+            //payload
+
             //check if product already exist?
+
             const product1 = payload;
-            const exist1 = state.find((x) => x.id === product1.id);
+            const exist1 = state.cart.find((x) => x.productId === product1.productId);
             if (exist1) {
                 //increase the quantity
-                return state.map((x) =>
-                    x.id === product1.id ? { ...x, qty: x.qty + 1 } : x //those id match that will increase others remain same
-                );
+
+                return {
+                    ...state,
+                    cart: state.cart.map((x) =>
+                        x.productId === product1.productId ? { ...x, qty: x.qty + 1 } : x //those id match that will increase others remain same
+                    )
+                }
             }
+
+
             break;
 
         case ActionTypes.DEL_CART:
             //check deleted product more than one or not
             const product2 = payload;
-            const exist2 = state.find((x) => x.id === product2.id);
+            const exist2 = state.cart.find((x) => x.productId === product2.productId);
             if (exist2.qty === 1)  //if qty 1 then filter out that product
             {
-                return state.filter((x) => x.id !== product2.id);
+                return {
+                    ...state,
+                    cart: state.cart.filter((x) => x.productId !== product2.productId)
 
+                }
             }
             break;
 
         case ActionTypes.DEC_CART:
             //check deleted product more than one or not
+            // console.log("state", state.cart);
             const product3 = payload;
-            const exist3 = state.find((x) => x.id === product3.id);
+            const exist3 = state.cart.find((x) => x.productId === product3.productId);
             if (exist3.qty !== 1) {  //qty more than one so (-1)
-                return state.map((x) =>
-                    x.id === product3.id ? { ...x, qty: x.qty - 1 } : x
-                )
+                return {
+                    ...state,
+                    cart: state.cart.map((x) =>
+                        x.productId === product3.productId ? { ...x, qty: x.qty - 1 } : x
+                    )
+                }
             }
             break;
 

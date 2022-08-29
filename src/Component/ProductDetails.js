@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 import { NavLink, useParams } from "react-router-dom"; //to get param value---param Hooks
 import { useDispatch, useSelector } from "react-redux";
 import { selectedProduct, removeSelectedReducer } from "../Redux/actions/productAction";
@@ -52,14 +52,17 @@ const ProductDetails = () => {
             <div className="container row ">
               <div className="content_text my-6 py-6">
                 <h4 className="text-uppercase text-black-50">Category: {category}</h4>
-                <h3 className="display-7 fw-bold my-4">Price: ${price}</h3>
+                <h3 className="display-7 fw-bold ">Price: ${price}</h3>
+
+                <div className="d-flex rating">
+
+                  <h3 className="display-7">Rating: {rating.rate} <FontAwesomeIcon icon={faStar} />   </h3>
+                  <h3 className="display-7 me-5">Total Reviews: {rating.count}</h3>
+                </div>
+
                 <h3 className="display-5">{title}</h3>
                 <h4 className="lead">{description}</h4>
 
-                <div className="d-flex rating">
-                  <h3 className="display-9">Rating: {rating.rate} <FontAwesomeIcon icon={faStar} />   </h3>
-                  <h3 className="display-9 me-5">Total Reviews: {rating.count}</h3>
-                </div>
 
 
 
