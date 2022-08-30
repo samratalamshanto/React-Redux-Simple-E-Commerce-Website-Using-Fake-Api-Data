@@ -31,9 +31,13 @@ export const addCart = (product) => async (dispatch) => {
         const { id, title, price, category, image, rating, description, qty } = product;
 
         const newProduct = {
-            "productId": product.id,
-            "qty": 1
+            productId: product.id,
+            qty: 1
         }
+        dispatch({
+            type: ActionTypes.ADD_CART,
+            payload: [newProduct],  //here its array of objects return as payload
+        })
         // console.log(qty);
         // console.log("new", newProduct);
         let axiosConfig = {
@@ -46,10 +50,7 @@ export const addCart = (product) => async (dispatch) => {
         };
 
         await axios.post("http://localhost:5001/cartdata", newProduct, axiosConfig).then(() => {
-            dispatch({
-                type: ActionTypes.ADD_CART,
-                payload: product,
-            })
+
         }).catch((err) => {
             // let message = typeof err.response !== "undefined" ? err.response.data.message : err.message;
             // console.warn("error", message)
@@ -77,13 +78,13 @@ export const incCart = (product) => async (dispatch) => {
 
     const { productId, qty } = product;
     const newProduct = {
-        productId: productId,
+        ...product,
         qty: qty + 1,
     }
     // console.log("hola inc", qty + 1);
     dispatch({
         type: ActionTypes.INC_CART,
-        payload: product,
+        payload: newProduct,
     })
 
 
@@ -93,23 +94,20 @@ export const incCart = (product) => async (dispatch) => {
     // }
     // console.log(qty);
     // console.log("new", newProduct);
-    // let axiosConfig = {
-    //     method: "PUT",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         "Access-Control-Allow-Origin": "*",
-    //     },
-    //     body: JSON.stringify(newProduct),
-    // };
+    let axiosConfig = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(newProduct),
+    };
 
-    // await axios.put("http://localhost:5001/cartdata", newProduct, axiosConfig).then(() => {
-    //     dispatch({
-    //         type: ActionTypes.INC_CART,
-    //         payload: product,
-    //     })
-    // }).catch((err) => {
-    //     console.log(err);
-    // });
+    await axios.put(`http://localhost:5001/cartdata/add/${productId}`, newProduct, axiosConfig).then(() => {
+
+    }).catch((err) => {
+        console.log(err);
+    });
 
 }
 
@@ -117,19 +115,29 @@ export const delCart = (product) => async (dispatch) => {
     try {
         const { productId, qty } = product;
         const newProduct = {
-            productId: productId,
+            ...product,
             qty: qty,  //del qty===1 that why this is called
         }
-
-        // if (qty === 1) {
-        //     await axios.delete("http://loclhost:5001/cartdata", newProduct);
-
-        // }
-
         dispatch({
             type: ActionTypes.DEL_CART,
-            payload: product,
+            payload: newProduct,
         })
+
+        let axiosConfig = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(newProduct),
+        };
+
+
+        await axios.delete(`http://localhost:5001/cartdata/${productId}`, newProduct, axiosConfig);
+
+
+
+
     } catch (error) {
         console.log(error);
 
@@ -141,19 +149,37 @@ export const decCart = (product) => async (dispatch) => {
     try {
         const { productId, qty } = product;
         const newProduct = {
-            productId: productId,
+            ...product,
             qty: qty - 1,
         }
-
-        // if (qty !== 1) {
-        //     await axios.put("http://loclhost:5001/cartdata", newProduct);
-
-        // }
-
+        // console.log("hola inc", qty + 1);
         dispatch({
             type: ActionTypes.DEC_CART,
-            payload: product,
+            payload: newProduct,
         })
+
+
+        // const newProduct = {
+        //     "productId": product.id,
+        //     "qty": qty + 1
+        // }
+        // console.log(qty);
+        // console.log("new", newProduct);
+        let axiosConfig = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify(newProduct),
+        };
+
+        await axios.put(`http://localhost:5001/cartdata/dec/${productId}`, newProduct, axiosConfig).then(() => {
+
+        }).catch((err) => {
+            console.log(err);
+        });
+
     } catch (error) {
         console.log(error);
 

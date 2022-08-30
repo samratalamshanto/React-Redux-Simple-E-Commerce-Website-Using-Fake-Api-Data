@@ -7,12 +7,24 @@ import { addCart, delCart, incCart, decCart, setCart } from "../Redux/actions/ca
 import { setProducts, selectedProduct } from "../Redux/actions/productAction.js"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faMinus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { NavLink } from "react-router-dom";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Cart = () => {
+    const showToastMessage = () => {
+        toast.success('Removed from the Cart.', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000,
+        });
+    };
+
+
+
     const dispatch = useDispatch();
 
     const cart = useSelector(state => state.HandelCartReducer.cart);
@@ -39,7 +51,10 @@ const Cart = () => {
     }, [dispatch]);
 
 
-
+    const handelDelUperButtonCart = (product) => {
+        showToastMessage();
+        dispatch(delCart(product));
+    }
 
     const handelAddButtonCart = (product) => {
         dispatch(incCart(product));
@@ -47,6 +62,7 @@ const Cart = () => {
     const handelDelButtonCart = (product) => {
         const { qty } = product;
         if (qty === 1) {
+            showToastMessage();
             dispatch(delCart(product));
         }
         else {
@@ -80,6 +96,10 @@ const Cart = () => {
                                             <img src={product1.image} alt="img" />
                                         </div>
                                         <div className="cart_content bg-white">
+                                            <div className="d-flex cart_trash">
+                                                <Button variant="outline-dark" onClick={() => handelDelUperButtonCart(x)} className="btn btn-lg btn-outline-dark me-2 fw-bold">
+                                                    <FontAwesomeIcon icon={faTrash} /></Button>
+                                            </div>
                                             <h4 className='my-1'>{product1.category}</h4>
                                             <h2 className='my-2'>{product1.title}</h2>
                                             <h4>Id: {x.productId}</h4>

@@ -50,6 +50,7 @@ function Header() {
                 <NavLink to="/signup" className="btn btn-outline-dark bg-info me-1 btn_shadow "><FontAwesomeIcon icon={faUserPlus} /> SignUp</NavLink>
                 <NavLink to="/cart" className="btn btn-outline-dark bg-info btn_shadow ">
                   <FontAwesomeIcon icon={faCartPlus} />
+
                   Cart ({cart.length}) {/* unique product shows in cart length */}
                 </NavLink>
 

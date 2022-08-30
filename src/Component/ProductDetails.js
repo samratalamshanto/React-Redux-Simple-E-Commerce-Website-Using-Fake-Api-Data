@@ -11,14 +11,23 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faStar, faStarHalf, faFaceGrinStars } from '@fortawesome/free-solid-svg-icons'
 
-import { addCart } from "../Redux/actions/cartAction";
+import { addCart, setCart } from "../Redux/actions/cartAction";
 
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const ProductDetails = () => {
-  const { productId } = useParams();
 
+  const showToastMessage = () => {
+    toast.success('Product added in cart list. Go to the Cart.', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 2000,
+    });
+  };
+
+  const { productId } = useParams();
+  const cart = useSelector((state) => state.HandelCartReducer.cart);
   const product = useSelector((state) => state.singleProduct); //this SingleProduct is the key in index reducer
   // console.log(product);
   const { id, title, price, category, image, rating, description } = product;
@@ -26,10 +35,21 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
 
   const addProductToCart = (product) => {
-    dispatch(addCart(product));
+    showToastMessage();
+
+    const exist = cart?.map((x) => x.productId === product.id);
+
+    if (exist && exist[0] === true) {
+
+    }
+    else {
+
+      dispatch(addCart(product));
+    }
   }
 
   useEffect(() => {
+    dispatch(setCart());
     if (productId && productId !== "") dispatch(selectedProduct(productId));  //need to check conditions
     return () => {  //#################### special #####################
       dispatch(removeSelectedReducer());  //for removing the last product
