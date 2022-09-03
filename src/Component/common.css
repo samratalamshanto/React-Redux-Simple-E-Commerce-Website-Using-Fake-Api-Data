@@ -9,6 +9,7 @@
 .hola {
     height: 50rem;
     background-color: aqua;
+    height: fit-content;
 }
 
 .btn_shadow {
